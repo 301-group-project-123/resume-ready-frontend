@@ -8,28 +8,42 @@ import MovieForm from './components/MovieForm';
 class Movies extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
+    this.state = ({
       zip: '',
       startDate: '',
       movies: []
-    }
-  }
-
-  handleInput = (e) => {
-    e.preventDefault();
-    this.setState({
-      zip: e.target.zip.value,
-      startDate: e.target.startDate.value
     })
   }
 
-  getMovieData = async () => {
+  handleZipInput = (e) => {
+    e.preventDefault();
+    this.setState({
+      zip: e.target.value
+    });
+    // console.log(e.target.startDate.value);
+  }
+
+  handleDateInput = (e) => {
+    e.preventDefault();
+    this.setState({
+      startDate: e.target.value });
+    // console.log(e.target.startDate.value);
+  }
+
+  getMovieData = async (e) => {
+    // console.log(this.state.movies);
+    e.preventDefault();
     try {
+
       let movieUrl = await axios.get(`${process.env.REACT_APP_SERVER}/movies?startDate=${this.state.startDate}&zip=${this.state.zip}`);
+
+      console.log(movieUrl);
+
       this.setState({
         movies: movieUrl.data
       });
-      console.log(this.state.movies);
+
+      
     } catch (error) {
       this.setState({
         error: true,
@@ -39,11 +53,13 @@ class Movies extends React.Component {
   }
   
   render(){
+    console.log(this.state.movies);
     return(
       <>
       <MovieForm 
       getMovieData={this.getMovieData}
-      handleInput={this.handleInput}
+      handleZipInput={this.handleZipInput}
+      handleDateInput={this.handleDateInput}
       />
       {/* <Form onSubmit={this.getMovieData}>
       <Form.Group controlId="zip">
