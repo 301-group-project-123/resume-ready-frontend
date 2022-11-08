@@ -2,6 +2,8 @@ import React from 'react';
 // import {Form, Button} from 'react-bootstrap';
 import axios from 'axios';
 import MovieForm from './components/MovieForm';
+import MovieDisplay from './components/MovieDisplay';
+import Collection from './pages/Collection';
 // import MovieDisplay from './components/MovieDisplay';
 // import MovieModal from './components/MovieModal';
 
@@ -51,6 +53,35 @@ class Movies extends React.Component {
       });
     }
   }
+
+  handleMovieSubmit = (event) => {
+    event.preventDefault();
+    let newMovie = {
+      title: event.target.title.value,
+      // author: event.target.aurthor.value,
+      description: event.target.description.value,
+      status: event.target.status.checked
+    };
+    this.setState({
+      openModal: false
+    });
+    this.postMovie(newMovie);
+  };
+
+  postMovie = async (movie) => {
+    try {
+      let url = `${process.env.REACT_APP_SERVER}/movie`;
+
+      await axios.post(url, movie);
+
+      // this.setState({
+      //   movies: [...this.state.movies, savedMovie.data]
+      // });
+
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
   
   render(){
     console.log(this.state.movies);
@@ -60,6 +91,15 @@ class Movies extends React.Component {
       getMovieData={this.getMovieData}
       handleZipInput={this.handleZipInput}
       handleDateInput={this.handleDateInput}
+      />
+      <MovieDisplay
+      movies={this.state.movies}
+      zip={this.state.zip}
+      startDate={this.state.startDate}
+      postMovie={this.postMovie}
+      />
+      <Collection
+      
       />
       {/* <Form onSubmit={this.getMovieData}>
       <Form.Group controlId="zip">
