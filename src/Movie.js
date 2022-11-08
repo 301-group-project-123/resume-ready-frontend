@@ -1,7 +1,7 @@
 import React from 'react';
-import {Form, Button} from 'react-bootstrap';
+// import {Form, Button} from 'react-bootstrap';
 import axios from 'axios';
-// import MovieForm from './components/MovieForm';
+import MovieForm from './components/MovieForm';
 // import MovieDisplay from './components/MovieDisplay';
 // import MovieModal from './components/MovieModal';
 
@@ -10,23 +10,26 @@ class Movies extends React.Component {
     super(props);
     this.state = {
       zip: '',
+      startDate: '',
+      movies: []
     }
   }
 
   handleInput = (e) => {
     e.preventDefault();
     this.setState({
-      zip: e.target.value
+      zip: e.target.zip.value,
+      startDate: e.target.startDate.value
     })
   }
 
-  getMovieData = async (e) => {
+  getMovieData = async () => {
     try {
-      let movieUrl = await axios.get(`${process.env.REACT_APP_SERVER}/`);
+      let movieUrl = await axios.get(`${process.env.REACT_APP_SERVER}/movies?startDate=${this.state.startDate}&zip=${this.state.zip}`);
       this.setState({
-        movieInfo: movieUrl.data
+        movies: movieUrl.data
       });
-      console.log(movieUrl);
+      console.log(this.state.movies);
     } catch (error) {
       this.setState({
         error: true,
@@ -38,13 +41,21 @@ class Movies extends React.Component {
   render(){
     return(
       <>
-      <Form onSubmit={this.getMovieData}>
-      <Form.Group controlId="title">
+      <MovieForm 
+      getMovieData={this.getMovieData}
+      handleInput={this.handleInput}
+      />
+      {/* <Form onSubmit={this.getMovieData}>
+      <Form.Group controlId="zip">
         <Form.Label>Zip Code</Form.Label>
-        <Form.Control type="text" defaultValue={this.state.zip}/>
+        <Form.Control type="text" placeholder='zip code'/>
+      </Form.Group>
+      <Form.Group controlId="startDate">
+        <Form.Label>Zip Code</Form.Label>
+        <Form.Control type="date" />
       </Form.Group>
       <Button type="submit">Look For Movies!</Button>
-    </Form>
+    </Form> */}
     </>
     )
   }
