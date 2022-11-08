@@ -3,7 +3,7 @@ import Header from './Header';
 import About from './pages/About';
 import Collection from './pages/Collection';
 import Profile from './pages/Profile';
-import Home from './pages/Home';
+import Movie from './Movie';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {
   BrowserRouter as Router,
@@ -20,7 +20,7 @@ class App extends React.Component {
           <Routes>
             <Route
               exact path="/"
-              element={<Home />}
+              element={<Movie />}
             >
             </Route>
             <Route
