@@ -3,6 +3,9 @@ import React from 'react';
 import axios from 'axios';
 import MovieForm from './components/MovieForm';
 import MovieDisplay from './components/MovieDisplay';
+import AuthButtons from './AuthButton';
+import { withAuth0 } from '@auth0/auth0-react';
+
 // import MovieDisplay from './components/MovieDisplay';
 // import MovieModal from './components/MovieModal';
 // import Collection from './pages/Collection';
@@ -36,14 +39,34 @@ class Movies extends React.Component {
     // console.log(this.state.movies);
     e.preventDefault();
     try {
+      if (this.props.auth0.isAuthenticated) {
+        const res = await this.props.auth0.getIdTokenClaims();
+  
+        const jwt = res.__raw;
+  
+        console.log('token:  ', jwt);
+        
+        const config = {
+          headers: { "Authorization": `Bearer ${jwt}` },
+          baseURL: process.env.REACT_APP_SERVER,
+          method: 'get',
+          url: '/movies',
+          params: {
+            startDate:this.state.startDate,
+            zip:this.state.zip
+          }
+        }
 
-      let movieUrl = await axios.get(`${process.env.REACT_APP_SERVER}/movies?startDate=${this.state.startDate}&zip=${this.state.zip}`);
+        let movieUrl = await axios(config);
+  
+        console.log(movieUrl);
+  
+        this.setState({
+          movies: movieUrl.data
+        });
+      }
 
-      console.log(movieUrl);
 
-      this.setState({
-        movies: movieUrl.data
-      });
 
       
     } catch (error) {
@@ -73,6 +96,7 @@ class Movies extends React.Component {
     console.log(this.state.movies);
     return(
       <>
+      <AuthButtons />
       <MovieForm 
       getMovieData={this.getMovieData}
       handleZipInput={this.handleZipInput}
@@ -100,4 +124,4 @@ class Movies extends React.Component {
   }
 }
 
-export default Movies;
+export default withAuth0(Movies);
