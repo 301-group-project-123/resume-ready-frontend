@@ -12,7 +12,7 @@ class MovieDisplay extends Component {
 
         {this.props.movies.map((movie, index)=>
         <Col className='m-4'>
-      <Card className='p-3' style={{ width: '18rem', height: '33rem' }}>
+      <Card className='p-3' >
       <Card.Body key={index}>
         {/* <Card.Img variant="top" src={`http://developer.tmsimg.com/${movie.poster}&api_key=be38dnxddupkyj7xnx3zgs76`} />   */}
         <Card.Img variant="top" src={`${Placeholder}`} />
