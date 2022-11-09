@@ -7,8 +7,8 @@ class MovieDisplay extends Component {
       <>
       <Card>
         {this.props.movies.map((movie, index)=>
-      <Card.Body>
-        <Card.Img variant="top" src={`http://developer.tmsimg.com/${movie.poster}?api_key=dv39ufj7ka8w8jttvcpbsg9j`} />  
+      <Card.Body key={index}>
+        {/* <Card.Img variant="top" src={`http://developer.tmsimg.com/${movie.poster}&api_key=be38dnxddupkyj7xnx3zgs76`} />   */}
         <Card.Title>{movie.title}</Card.Title> 
         <Card.Text>{movie.description}</Card.Text> 
         <Card.Text>{movie.theatre}</Card.Text>    

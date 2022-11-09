@@ -3,9 +3,9 @@ import React from 'react';
 import axios from 'axios';
 import MovieForm from './components/MovieForm';
 import MovieDisplay from './components/MovieDisplay';
-import Collection from './pages/Collection';
 // import MovieDisplay from './components/MovieDisplay';
 // import MovieModal from './components/MovieModal';
+// import Collection from './pages/Collection';
 
 class Movies extends React.Component {
   constructor(props) {
@@ -54,20 +54,6 @@ class Movies extends React.Component {
     }
   }
 
-  handleMovieSubmit = (event) => {
-    event.preventDefault();
-    let newMovie = {
-      title: event.target.title.value,
-      // author: event.target.aurthor.value,
-      description: event.target.description.value,
-      status: event.target.status.checked
-    };
-    this.setState({
-      openModal: false
-    });
-    this.postMovie(newMovie);
-  };
-
   postMovie = async (movie) => {
     try {
       let url = `${process.env.REACT_APP_SERVER}/movie`;
@@ -97,9 +83,6 @@ class Movies extends React.Component {
       zip={this.state.zip}
       startDate={this.state.startDate}
       postMovie={this.postMovie}
-      />
-      <Collection
-      
       />
       {/* <Form onSubmit={this.getMovieData}>
       <Form.Group controlId="zip">
