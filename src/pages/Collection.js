@@ -1,8 +1,9 @@
 import { Component } from 'react';
 import axios from 'axios';
-import {Card, Button} from 'react-bootstrap';
+import {Card, Button, Col, Row, Container} from 'react-bootstrap';
 import MovieModal from '../components/MovieModal';
 import { withAuth0 } from '@auth0/auth0-react';
+import Placeholder from '../images/placeholder.jpg'
 
 class CollectionOfMovies extends Component {
   constructor(props) {
@@ -137,23 +138,30 @@ class CollectionOfMovies extends Component {
     // TODO: render information about Collection
     return (
       <>
-      <Card>
+      <Container>
+        <Row xs={1} sm={3} md={4} lg={5}>
         {this.state.collectMovies.map((movie, index)=>
+        <Col className='m-4'>
+      <Card className='p-3' border="info" style={{ width: '19rem', height: '36rem', backgroundColor: 'black' }}>
       <Card.Body key={index}>
         {/* <Card.Img variant="top" src={`http://developer.tmsimg.com/${movie.poster}?api_key=dv39ufj7ka8w8jttvcpbsg9j`} />   */}
-        <Card.Title>{movie.title}</Card.Title> 
-        <Card.Text>{movie.description}</Card.Text> 
-        <Card.Text>{movie.theatre}</Card.Text>    
-        <Card.Text>{movie.genres}</Card.Text> 
-        <Card.Text>{movie.dateTime}</Card.Text>
+        <Card.Img variant="top" src={`${Placeholder}`} />
+        <Card.Title style={{color:'white'}} >{movie.title}</Card.Title> 
+        <Card.Text style={{backgroundColor: 'black', color:'white' }} >{movie.description}></Card.Text> 
+        <Card.Text style={{backgroundColor: 'black', color:'white' }}>{movie.theatre}</Card.Text>    
+        <Card.Text style={{backgroundColor: 'black', color:'white' }}>{movie.genres}</Card.Text> 
+        <Card.Text style={{backgroundColor: 'black', color:'white' }}>{movie.dateTime}</Card.Text>
         {movie.review && 
-        <Card.Text>{movie.review}</Card.Text>
+        <Card.Text style={{backgroundColor: 'black', color:'white' }}>{movie.review}</Card.Text>
         }
-        <Button onClick={()=> {this.deleteMovie(movie._id)}}>Delete From Collection</Button>
-        <Button onClick={()=> {this.updateOpenModal(movie)}}>Leave A Review</Button>
+        <Button variant="danger" style={{marginRight:'1vw'}} onClick={()=> {this.deleteMovie(movie._id)}}>Delete</Button>
+        <Button variant="info" onClick={()=> {this.updateOpenModal(movie)}}>Leave A Review</Button>
         </Card.Body>
-        )}
         </Card>
+        </Col>
+        )}
+        </Row>
+        </Container>
         <MovieModal
         openModal={this.state.openModal}
         updateCloseModal={this.updateCloseModal}

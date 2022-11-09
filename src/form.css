@@ -1,0 +1,13 @@
+#form{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    position: relative;
+    top: 100px;
+    left: 70px;
+}
+#formButton {
+ position: relative;
+ top: 5px;
+ left: 45px;
+}
