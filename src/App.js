@@ -5,6 +5,7 @@ import Collection from './pages/Collection';
 import Profile from './pages/Profile';
 import Movie from './Movie';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import './App.css';
 import {
   BrowserRouter as Router,
   Routes,
@@ -16,7 +17,7 @@ class App extends React.Component {
     return (
       <>
         <Router>
-          <Header />
+          <Header className="App-header" />
           <Routes>
             <Route
               exact path="/"

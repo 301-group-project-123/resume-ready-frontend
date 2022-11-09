@@ -1,7 +1,8 @@
 import { Component } from 'react';
 import axios from 'axios';
 import {Card, Button} from 'react-bootstrap';
-import MovieModal from '../components/MovieModal'
+import MovieModal from '../components/MovieModal';
+import { withAuth0 } from '@auth0/auth0-react';
 
 class CollectionOfMovies extends Component {
   constructor(props) {
@@ -17,14 +18,29 @@ class CollectionOfMovies extends Component {
   getDataBase = async () => {
     // console.log(this.state.movies);
     try {
+      if (this.props.auth0.isAuthenticated) {
+        const res = await this.props.auth0.getIdTokenClaims();
+  
+        const jwt = res.__raw;
+  
+        console.log('token:  ', jwt);
+        
+        const config = {
+          headers: { "Authorization": `Bearer ${jwt}` },
+          baseURL: process.env.REACT_APP_SERVER,
+          method: 'get',
+          url: '/movie',
+        }
 
-      let movieUrl = await axios.get(`${process.env.REACT_APP_SERVER}/movie`);
-
-      this.setState({
-        collectMovies: movieUrl.data
-      });
-
-      
+        let movieUrl = await axios(config);
+  
+        console.log(movieUrl);
+  
+        this.setState({
+          collectMovies: movieUrl.data
+        });
+      }
+ 
     } catch (error) {
       this.setState({
         error: true,
@@ -134,4 +150,4 @@ class CollectionOfMovies extends Component {
 
 }
 
-export default CollectionOfMovies;
+export default withAuth0(CollectionOfMovies);
