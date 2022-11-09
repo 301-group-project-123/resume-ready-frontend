@@ -69,19 +69,36 @@ class CollectionOfMovies extends Component {
 
   updatedMovie = async (movie) => {
     try {
-      console.log(movie);
-      let url = `${process.env.REACT_APP_SERVER}/movie/${movie._id}`;
-      let updatedMovie = await axios.put(url, movie);
+      if (this.props.auth0.isAuthenticated) {
+        const res = await this.props.auth0.getIdTokenClaims();
+  
+        const jwt = res.__raw;
+  
+        console.log('token:  ', jwt);
+        
+        const config = {
+          headers: { "Authorization": `Bearer ${jwt}` },
+          baseURL: process.env.REACT_APP_SERVER,
+          method: 'put',
+          url: `/movie/${movie._id}`,
+          data: {
+            movie
+          }
+        }
 
-      let updatedMoviesArray = this.state.collectMovies.map(existingMovie => {
-        return existingMovie._id === movie._id
-          ? updatedMovie.data
-          : existingMovie;
-      });
-
-      this.setState({
-        collectMovies: updatedMoviesArray
-      });
+        console.log(movie);
+        let updatedMovie = await axios(config);
+        let updatedMoviesArray = this.state.collectMovies.map(existingMovie => {
+          return existingMovie._id === movie._id
+            ? updatedMovie.data
+            : existingMovie;
+        });
+  
+        this.setState({
+          collectMovies: updatedMoviesArray
+        });
+  
+      }
 
     } catch (error) {
       console.log(error.message);
