@@ -79,19 +79,30 @@ class Movies extends React.Component {
 
   postMovie = async (movie) => {
     try {
-      let url = `${process.env.REACT_APP_SERVER}/movie`;
+      if (this.props.auth0.isAuthenticated) {
+        const res = await this.props.auth0.getIdTokenClaims();
 
-      await axios.post(url, movie);
+        const jwt = res.__raw;
 
-      // this.setState({
-      //   movies: [...this.state.movies, savedMovie.data]
-      // });
+        console.log('token:  ', jwt);
+
+        const config = {
+          headers: { "Authorization": `Bearer ${jwt}` },
+          baseURL: process.env.REACT_APP_SERVER,
+          method: 'post',
+          url: '/movie',
+          data: {
+            movie
+          }
+        }
+        await axios(config);
+      }
 
     } catch (error) {
       console.log(error.message);
     }
   };
-  
+
   render(){
     console.log(this.state.movies);
     return(
@@ -108,17 +119,6 @@ class Movies extends React.Component {
       startDate={this.state.startDate}
       postMovie={this.postMovie}
       />
-      {/* <Form onSubmit={this.getMovieData}>
-      <Form.Group controlId="zip">
-        <Form.Label>Zip Code</Form.Label>
-        <Form.Control type="text" placeholder='zip code'/>
-      </Form.Group>
-      <Form.Group controlId="startDate">
-        <Form.Label>Zip Code</Form.Label>
-        <Form.Control type="date" />
-      </Form.Group>
-      <Button type="submit">Look For Movies!</Button>
-    </Form> */}
     </>
     )
   }

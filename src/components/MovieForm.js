@@ -7,7 +7,7 @@ class FormBuild extends React.Component {
 render(){
   return(
     <>
-    <Form onSubmit={this.props.getMovieData}>
+    <Form style={{ width: '15rem', height: '25rem' }} onSubmit={this.props.getMovieData}>
     <Form.Group controlId="zip">
       <Form.Label>Zip Code</Form.Label>
       <Form.Control onInput={this.props.handleZipInput} type="text" placeholder='zip code'/>

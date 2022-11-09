@@ -1,6 +1,7 @@
 import { Component } from 'react';
 import {Card} from 'react-bootstrap';
 import JonathanImage from '../images/jonathan.jpg';
+import '../about.css';
 
 class About extends Component {
 
