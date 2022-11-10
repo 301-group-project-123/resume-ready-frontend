@@ -1,6 +1,6 @@
 import { Component } from 'react';
 import axios from 'axios';
-import {Card, Button, Col, Row, Container} from 'react-bootstrap';
+import { Card, Button, Col, Row, Container } from 'react-bootstrap';
 import MovieModal from '../components/MovieModal';
 import { withAuth0 } from '@auth0/auth0-react';
 import AuthButtons from '../AuthButton';
@@ -12,7 +12,7 @@ class CollectionOfMovies extends Component {
       collectMovies: [],
       error: false,
       openModal: false,
-      selectedMovie:{}
+      selectedMovie: {}
     })
   }
 
@@ -21,11 +21,11 @@ class CollectionOfMovies extends Component {
     try {
       if (this.props.auth0.isAuthenticated) {
         const res = await this.props.auth0.getIdTokenClaims();
-  
+
         const jwt = res.__raw;
-  
+
         console.log('token:  ', jwt);
-        
+
         const config = {
           headers: { "Authorization": `Bearer ${jwt}` },
           baseURL: process.env.REACT_APP_SERVER,
@@ -34,14 +34,14 @@ class CollectionOfMovies extends Component {
         }
 
         let movieUrl = await axios(config);
-  
+
         console.log(movieUrl);
-  
+
         this.setState({
           collectMovies: movieUrl.data
         });
       }
- 
+
     } catch (error) {
       this.setState({
         error: true,
@@ -72,11 +72,11 @@ class CollectionOfMovies extends Component {
     try {
       if (this.props.auth0.isAuthenticated) {
         const res = await this.props.auth0.getIdTokenClaims();
-  
+
         const jwt = res.__raw;
-  
+
         console.log('token:  ', jwt);
-        
+
         const config = {
           headers: { "Authorization": `Bearer ${jwt}` },
           baseURL: process.env.REACT_APP_SERVER,
@@ -94,11 +94,11 @@ class CollectionOfMovies extends Component {
             ? updatedMovie.data
             : existingMovie;
         });
-  
+
         this.setState({
           collectMovies: updatedMoviesArray
         });
-  
+
       }
 
     } catch (error) {
@@ -130,7 +130,7 @@ class CollectionOfMovies extends Component {
     });
   };
 
-  componentDidMount(){
+  componentDidMount() {
     this.getDataBase();
   };
 
@@ -139,35 +139,35 @@ class CollectionOfMovies extends Component {
     return (
       <>
         <AuthButtons />
-      <Container id='cltn'>
-        <Row xs={1} sm={3} md={4} lg={5}>
-        {this.state.collectMovies.map((movie, index)=>
-        <Col className='m-4'>
-      <Card className='p-3' border="info" style={{ width: '19rem', height: '36rem', backgroundColor: 'black' }}>
-      <Card.Body key={index}>
-      <Card.Img variant="top" src={`http://fanc.tmsimg.com/${movie.poster}&api_key=${process.env.REACT_APP_MOVIEAPI}`} />  
-       
-        <Card.Title style={{color:'white'}} >{movie.title}</Card.Title> 
-        <Card.Text style={{backgroundColor: 'black', color:'white' }} >{movie.description}></Card.Text> 
-        <Card.Text style={{backgroundColor: 'black', color:'white' }}>{movie.theatre}</Card.Text>    
-        <Card.Text style={{backgroundColor: 'black', color:'white' }}>{movie.genres}</Card.Text> 
-        <Card.Text style={{backgroundColor: 'black', color:'white' }}>{movie.dateTime}</Card.Text>
-        {movie.review && 
-        <Card.Text style={{backgroundColor: 'black', color:'white' }}>{movie.review}</Card.Text>
-        }
-        <Button variant="danger" style={{marginRight:'1vw'}} onClick={()=> {this.deleteMovie(movie._id)}}>Delete</Button>
-        <Button variant="info" onClick={()=> {this.updateOpenModal(movie)}}>Leave A Review</Button>
-        </Card.Body>
-        </Card>
-        </Col>
-        )}
-        </Row>
+        <Container id='cltn'>
+          <Row xs={1} sm={3} md={4} lg={5}>
+            {this.state.collectMovies.map((movie, index) =>
+              <Col className='m-4'>
+                <Card className='p-3' border="info" style={{ width: '19rem', height: '36rem', backgroundColor: 'black' }}>
+                  <Card.Body key={index}>
+                    <Card.Img variant="top" src={`http://fanc.tmsimg.com/${movie.poster}&api_key=${process.env.REACT_APP_MOVIEAPI}`} />
+
+                    <Card.Title style={{ color: 'white' }} >{movie.title}</Card.Title>
+                    <Card.Text style={{ backgroundColor: 'black', color: 'white' }} >{movie.description}</Card.Text>
+                    <Card.Text style={{ backgroundColor: 'black', color: 'white' }}>{movie.theatre}</Card.Text>
+                    <Card.Text style={{ backgroundColor: 'black', color: 'white' }}>{movie.genres}</Card.Text>
+                    <Card.Text style={{ backgroundColor: 'black', color: 'white' }}>{movie.dateTime}</Card.Text>
+                    {movie.review &&
+                      <Card.Text style={{ backgroundColor: 'black', color: 'white' }}>{movie.review}</Card.Text>
+                    }
+                    <Button variant="danger" style={{ marginRight: '1vw' }} onClick={() => { this.deleteMovie(movie._id) }}>Delete</Button>
+                    <Button variant="info" onClick={() => { this.updateOpenModal(movie) }}>Leave A Review</Button>
+                  </Card.Body>
+                </Card>
+              </Col>
+            )}
+          </Row>
         </Container>
         <MovieModal
-        openModal={this.state.openModal}
-        updateCloseModal={this.updateCloseModal}
-        updatedMovie={this.updatedMovie}
-        selectedMovie={this.state.selectedMovie}
+          openModal={this.state.openModal}
+          updateCloseModal={this.updateCloseModal}
+          updatedMovie={this.updatedMovie}
+          selectedMovie={this.state.selectedMovie}
         // handleMovieSubmit={this.handleMovieSubmit}
         />
       </>

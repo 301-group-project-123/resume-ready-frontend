@@ -9,7 +9,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 import { withAuth0 } from '@auth0/auth0-react';
 import Login from './Login';
-import Logout from './Logout';
+// import Logout from './Logout';
 import {
   BrowserRouter as Router,
   Routes,
