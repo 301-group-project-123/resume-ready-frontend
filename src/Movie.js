@@ -104,8 +104,8 @@ class Movies extends React.Component {
   };
 
   render(){
-    // console.log(this.state.movies);
-    console.log('state>>>', this.state);
+    console.log('movie>>>', this.state.movies);
+    // console.log('state>>>', this.state);
     return(
       <>
       <AuthButtons />

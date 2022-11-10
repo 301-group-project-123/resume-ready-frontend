@@ -148,7 +148,7 @@ class CollectionOfMovies extends Component {
       <Card.Img variant="top" src={`http://fanc.tmsimg.com/${movie.poster}&api_key=${process.env.REACT_APP_MOVIEAPI}`} />  
        
         <Card.Title style={{color:'white'}} >{movie.title}</Card.Title> 
-        <Card.Text style={{backgroundColor: 'black', color:'white' }} >{movie.description}></Card.Text> 
+        <Card.Text style={{backgroundColor: 'black', color:'white' }} >{movie.description}</Card.Text> 
         <Card.Text style={{backgroundColor: 'black', color:'white' }}>{movie.theatre}</Card.Text>    
         <Card.Text style={{backgroundColor: 'black', color:'white' }}>{movie.genres}</Card.Text> 
         <Card.Text style={{backgroundColor: 'black', color:'white' }}>{movie.dateTime}</Card.Text>
