@@ -10,6 +10,7 @@ class updateMovie extends React.Component {
       title: event.target.title.value,
       description: event.target.description.value,
       theatre: this.props.selectedMovie.theatre,
+      dateTime: this.props.selectedMovie.dateTime,
       poster: this.props.selectedMovie.poster,
       status: event.target.status.checked,
       review: event.target.review.value,

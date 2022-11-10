@@ -145,7 +145,7 @@ class CollectionOfMovies extends Component {
           <Row xs={1} sm={3} md={4} lg={5}>
             {this.state.collectMovies.map((movie, index) =>
               <Col className='m-4'>
-                <Card className='p-3' border="info" style={{ width: '19rem', height: '36rem', backgroundColor: 'black' }}>
+                <Card className='p-3' border="info" style={{ width: '19rem', height: '40rem', backgroundColor: 'black' }}>
                   <Card.Body key={index}>
                   <Card.Img variant="top" style={{height:'27vh'}}src={`http://fanc.tmsimg.com/${movie.poster}&api_key=${process.env.REACT_APP_MOVIEAPI}`}/>
                     <Card.Title style={{ color: 'white' }} >{movie.title}</Card.Title>
