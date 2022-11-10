@@ -1,5 +1,6 @@
 import React from 'react';
 import Header from './Header';
+import Footer from './Footer';
 import About from './pages/About';
 import Collection from './pages/Collection';
 import Profile from './pages/Profile';
@@ -39,9 +40,9 @@ class App extends React.Component {
               element={<Profile />}
             >
             </Route>
-
             {/* PLACEHOLDER: add a route with a path of '/about' that renders the `About` component */}
           </Routes>
+          <Footer/>
         </Router>
       </>
     );

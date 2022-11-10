@@ -1,0 +1,62 @@
+#title {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  color: white;
+}
+
+#one{
+  margin-right: 0.5vmax;
+  /* font-size: 25px; */
+  transition: all .5s ease-in-out;
+  padding: 0.7vmax;
+  border-radius: 0.9%;
+ }
+ 
+ #one:hover{
+   background-color: rgb(19, 170, 197);
+   border-radius: 15px;
+   animation: shrink 1.3s ease infinite;
+  }
+
+  #two{
+    margin-right: 0.5vmax;
+    /* font-size: 25px; */
+    transition: all .5s ease-in-out;
+    padding: 0.6vmax;
+    border-radius: 0.9%;
+   }
+   
+   #two:hover{
+     background-color: rgb(19, 170, 197);
+     border-radius: 15px;
+     animation: shrink 1.3s ease infinite;
+    }
+
+    #three{
+      margin-right: 0.5vmax;
+      /* font-size: 25px; */
+      transition: all .5s ease-in-out;
+      padding: 0.6vmax;
+      border-radius: 0.9%;
+     }
+     
+     #three:hover{
+       background-color: rgb(19, 170, 197);
+       border-radius: 15px;
+       animation: shrink 1.3s ease infinite;
+      }
+
+      #four{
+        margin-right: 0.5vmax;
+        /* font-size: 25px; */
+        transition: all .5s ease-in-out;
+        padding: 0.6vmax;
+        border-radius: 0.9%;
+       }
+       
+       #four:hover{
+         background-color: rgb(19, 170, 197);
+         border-radius: 15px;
+         animation: shrink 1.3s ease infinite;
+        }
