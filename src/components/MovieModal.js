@@ -10,6 +10,8 @@ class updateMovie extends React.Component {
       title: event.target.title.value,
       description: event.target.description.value,
       theatre: this.props.selectedMovie.theatre,
+      dateTime: this.props.selectedMovie.dateTime,
+      poster: this.props.selectedMovie.poster,
       status: event.target.status.checked,
       review: event.target.review.value,
       _id: this.props.selectedMovie._id,
@@ -47,7 +49,7 @@ class updateMovie extends React.Component {
                       <Form.Label>Review</Form.Label>
                       <Form.Control type="text" defaultValue={this.props.selectedMovie.review}/>
                     </Form.Group>
-                    <Button type="submit">Submit Review!</Button>
+                    <Button variant="info" type="submit">Submit Review!</Button>
                   </Form>
                 </Container>
               </>
