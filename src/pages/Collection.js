@@ -147,7 +147,7 @@ class CollectionOfMovies extends Component {
               <Col className='m-4'>
                 <Card className='p-3' border="info" style={{ width: '19rem', height: '40rem', backgroundColor: 'black' }}>
                   <Card.Body key={index}>
-                  <Card.Img variant="top" style={{height:'27vh'}}src={`http://fanc.tmsimg.com/${movie.poster}&api_key=${process.env.REACT_APP_MOVIEAPI}`}/>
+                  <Card.Img variant="top" style={{height:'27vh'}}src={`http://fanc.tmsimg.com/${movie.poster}`}/>
                     <Card.Title style={{ color: 'white' }} >{movie.title}</Card.Title>
                     <Card.Text style={{ backgroundColor: 'black', color: 'white' }} >{movie.description}</Card.Text>
                     <Card.Text style={{ backgroundColor: 'black', color: 'white' }}>{movie.theatre}</Card.Text>
