@@ -139,6 +139,8 @@ class CollectionOfMovies extends Component {
     return (
       <>
         <AuthButtons />
+
+
         <Container id='cltn'>
           <Row xs={1} sm={3} md={4} lg={5}>
             {this.state.collectMovies.map((movie, index) =>
