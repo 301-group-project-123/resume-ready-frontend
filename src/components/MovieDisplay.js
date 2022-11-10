@@ -1,6 +1,5 @@
 import { Component } from 'react';
 import {Card, Button, Row, Container, Col, ListGroup} from 'react-bootstrap';
-import Placeholder from '../images/placeholder.jpg'
 import '../moviedisplay.css'
 
 class MovieDisplay extends Component {
@@ -14,8 +13,7 @@ class MovieDisplay extends Component {
         <Col className='m-4'>
       <Card className='p-3' border="info" style={{ width: '19rem', height: '36rem', backgroundColor: 'black' }}>
       <Card.Body key={index}>
-        {/* <Card.Img variant="top" src={`http://developer.tmsimg.com/${movie.poster}&api_key=be38dnxddupkyj7xnx3zgs76`} />   */}
-        <Card.Img variant="top" src={`${Placeholder}`} />
+        <Card.Img variant="top" src={`http://fanc.tmsimg.com/${movie.poster}&api_key=${process.env.REACT_APP_MOVIEAPI}`} />  
         <Card.Title style={{color:'white'}}>{movie.title}</Card.Title> 
         <ListGroup style={{backgroundColor: 'gray' }} className="list-group-flush">
         <ListGroup.Item style={{backgroundColor: 'black', color:'white' }} >{movie.description}</ListGroup.Item>

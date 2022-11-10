@@ -3,7 +3,6 @@ import axios from 'axios';
 import {Card, Button, Col, Row, Container} from 'react-bootstrap';
 import MovieModal from '../components/MovieModal';
 import { withAuth0 } from '@auth0/auth0-react';
-import Placeholder from '../images/placeholder.jpg';
 import AuthButtons from '../AuthButton';
 
 class CollectionOfMovies extends Component {
@@ -146,8 +145,8 @@ class CollectionOfMovies extends Component {
         <Col className='m-4'>
       <Card className='p-3' border="info" style={{ width: '19rem', height: '36rem', backgroundColor: 'black' }}>
       <Card.Body key={index}>
-        {/* <Card.Img variant="top" src={`http://developer.tmsimg.com/${movie.poster}?api_key=dv39ufj7ka8w8jttvcpbsg9j`} />   */}
-        <Card.Img variant="top" src={`${Placeholder}`} />
+      <Card.Img variant="top" src={`http://fanc.tmsimg.com/${movie.poster}&api_key=${process.env.REACT_APP_MOVIEAPI}`} />  
+       
         <Card.Title style={{color:'white'}} >{movie.title}</Card.Title> 
         <Card.Text style={{backgroundColor: 'black', color:'white' }} >{movie.description}></Card.Text> 
         <Card.Text style={{backgroundColor: 'black', color:'white' }}>{movie.theatre}</Card.Text>    
