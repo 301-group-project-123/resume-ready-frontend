@@ -7,6 +7,9 @@ import Profile from './pages/Profile';
 import Movie from './Movie';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
+import { withAuth0 } from '@auth0/auth0-react';
+import Login from './Login';
+import Logout from './Logout';
 import {
   BrowserRouter as Router,
   Routes,
@@ -18,35 +21,61 @@ class App extends React.Component {
     return (
       <>
         <Router>
-          <Header className="App-header" />
           <Routes>
             <Route
               exact path="/"
-              element={<Movie />}
+              element={
+                this.props.auth0.isAuthenticated ?
+                  <>
+                    <Header className="App-header" />
+                    {/* <Logout/> */}
+                    <Movie />
+                    <Footer />
+
+                  </>
+                  : <Login />
+              }
             >
             </Route>
             <Route
               exact path="/about"
-              element={<About />}
+              element={
+              <>
+              <Header className="App-header" />
+              <About />
+              <Footer />
+              </>
+              }
             >
             </Route>
             <Route
               exact path="/collection"
-              element={<Collection />}
+              element={
+              <>
+               <Header className="App-header" />
+               <Collection />
+               <Footer />
+              </>
+             }
             >
             </Route>
             <Route
               exact path="/profile"
-              element={<Profile />}
+              element={
+              <>
+               <Header className="App-header" />
+               <Profile />
+               <Footer />
+              </>
+             }
             >
             </Route>
             {/* PLACEHOLDER: add a route with a path of '/about' that renders the `About` component */}
           </Routes>
-          <Footer/>
         </Router>
       </>
     );
   }
 }
 
-export default App;
+export default withAuth0(App);

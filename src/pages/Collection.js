@@ -3,7 +3,8 @@ import axios from 'axios';
 import {Card, Button, Col, Row, Container} from 'react-bootstrap';
 import MovieModal from '../components/MovieModal';
 import { withAuth0 } from '@auth0/auth0-react';
-import Placeholder from '../images/placeholder.jpg'
+import Placeholder from '../images/placeholder.jpg';
+import AuthButtons from '../AuthButton';
 
 class CollectionOfMovies extends Component {
   constructor(props) {
@@ -138,7 +139,8 @@ class CollectionOfMovies extends Component {
     // TODO: render information about Collection
     return (
       <>
-      <Container>
+        <AuthButtons />
+      <Container id='cltn'>
         <Row xs={1} sm={3} md={4} lg={5}>
         {this.state.collectMovies.map((movie, index)=>
         <Col className='m-4'>
