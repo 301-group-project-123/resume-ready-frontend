@@ -1,6 +1,7 @@
 import { Component } from 'react';
 import {Card} from 'react-bootstrap';
 import JonathanImage from '../images/jonathan.jpg';
+import domaineImage from '../images/domaine.jpeg';
 import '../about.css';
 
 class About extends Component {
@@ -27,7 +28,7 @@ class About extends Component {
           </Card>
 
           <Card style={{ width: '18rem' }}>
-            <Card.Img class='domaine' src={''} a href="https://github.com/dalexscully" />
+            <Card.Img class='domaine' src={domaineImage} a href="https://github.com/dalexscully" />
             <Card.Body>
               <Card.Title>Domaine Scully</Card.Title>
               <Card.Text>Hello</Card.Text>

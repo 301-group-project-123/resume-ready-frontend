@@ -1,6 +1,5 @@
 import { Component } from 'react';
-import {Card, Button, Row, Container, Col} from 'react-bootstrap';
-import Placeholder from '../images/placeholder.jpg'
+import {Card, Button, Row, Container, Col, ListGroup} from 'react-bootstrap';
 import '../moviedisplay.css'
 
 class MovieDisplay extends Component {
@@ -12,16 +11,21 @@ class MovieDisplay extends Component {
 
         {this.props.movies.map((movie, index)=>
         <Col className='m-4'>
-      <Card className='p-3' >
+      <Card className='p-3' border="info" style={{ width: '19rem', height: '36rem', backgroundColor: 'black' }}>
       <Card.Body key={index}>
-        {/* <Card.Img variant="top" src={`http://developer.tmsimg.com/${movie.poster}&api_key=be38dnxddupkyj7xnx3zgs76`} />   */}
-        <Card.Img variant="top" src={`${Placeholder}`} />
-        <Card.Title>{movie.title}</Card.Title> 
-        <Card.Text>{movie.description}</Card.Text> 
+        <Card.Img variant="top" src={`http://fanc.tmsimg.com/${movie.poster}&api_key=${process.env.REACT_APP_MOVIEAPI}`} />  
+        <Card.Title style={{color:'white'}}>{movie.title}</Card.Title> 
+        <ListGroup style={{backgroundColor: 'gray' }} className="list-group-flush">
+        <ListGroup.Item style={{backgroundColor: 'black', color:'white' }} >{movie.description}</ListGroup.Item>
+        <ListGroup.Item style={{backgroundColor: 'black', color:'white' }} >{movie.theatre}</ListGroup.Item>
+        <ListGroup.Item style={{backgroundColor: 'black', color:'white' }} >{movie.genres}</ListGroup.Item>
+        <ListGroup.Item style={{backgroundColor: 'black', color:'white' }} >{movie.dateTime}</ListGroup.Item>
+      </ListGroup>
+        {/* <Card.Text>{movie.description}</Card.Text> 
         <Card.Text>{movie.theatre}</Card.Text>    
         <Card.Text>{movie.genres}</Card.Text> 
-        <Card.Text>{movie.dateTime}</Card.Text> 
-        <Button onClick={()=> {this.props.postMovie(movie)}}>Save To Collection</Button>
+        <Card.Text>{movie.dateTime}</Card.Text>  */}
+        <Button variant="info" onClick={()=> {this.props.postMovie(movie)}}>Save To Collection</Button>
         </Card.Body>
         </Card>
         </Col>
